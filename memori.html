@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memorable Photo</title>
+  <style>
+    /* Global styles */
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #fff0f5; /* Light pink background */
+      font-family: 'Inter', sans-serif; /* Use Inter font */
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh; /* Ensure full viewport height */
+      overflow-x: hidden; /* Prevent horizontal scrolling */
+    }
+
+    /* Gallery container */
+    .gallery {
+      display: flex;
+      flex-direction: column; /* Stack rows vertically */
+      gap: 20px; /* Gap between rows */
+      max-width: 95%; /* Increased max width for more flexibility */
+      margin: 0 auto; /* Center the gallery */
+    }
+
+    /* Photo row */
+    .photo-row {
+      display: flex;
+      justify-content: center; /* Center photos horizontally */
+      flex-wrap: wrap; /* Allow photos to wrap on smaller screens */
+      gap: 20px; /* Gap between photos in a row */
+      align-items: flex-start; /* KEY CHANGE: Prevents vertical stretching of items in the row */
+    }
+
+    /* Individual photo styling */
+    .photo {
+      background: #fff; /* White background for photo card */
+      padding: 10px; /* Padding for the border */
+      border-radius: 12px; /* Rounded corners */
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1); /* Soft shadow */
+      transition: transform 0.3s ease; /* Smooth hover effect */
+      display: flex; /* Use flexbox for internal alignment */
+      flex-direction: column; /* Stack image and caption vertically */
+      align-items: center; /* Center items horizontally within the card */
+      width: fit-content; /* Make the width adjust to its content */
+      /* Max width for the photo card, accounting for image max-width + padding */
+      max-width: calc(250px + (10px * 2)); /* 250px (image) + 20px (padding) */
+      box-sizing: border-box; /* Include padding in width calculation */
+    }
+
+    .photo:hover {
+      transform: scale(1.05); /* Slightly enlarge on hover */
+    }
+
+    .photo img {
+      width: 100%; /* Image fills its container's content area */
+      height: auto; /* Maintain aspect ratio */
+      border-radius: 8px; /* Rounded corners for image */
+      max-width: 250px; /* Explicit maximum width for the image */
+    }
+
+    /* Caption styling */
+    .caption {
+      margin-top: 8px;
+      font-size: 0.95rem;
+      color: #b04b6e; /* Pinkish-red color for caption */
+      font-style: italic;
+      text-align: center; /* Center the caption text */
+      /* Set max-width to match the image's max-width for consistent card size */
+      max-width: 250px;
+      word-wrap: break-word; /* Break long words if necessary */
+      padding: 0; /* No internal padding for caption to allow precise max-width control */
+    }
+
+    /* Back button styling */
+    .back-button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: #fff;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      color: #ee6e73;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #fce4ec;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .photo {
+        max-width: calc(180px + (10px * 2)); /* Adjust photo max-width for smaller screens */
+      }
+      .photo img {
+        max-width: 180px;
+      }
+      .caption {
+        max-width: 180px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .photo {
+        max-width: calc(140px + (10px * 2)); /* Further adjust photo max-width for very small screens */
+      }
+      .photo img {
+        max-width: 140px;
+      }
+      .caption {
+        max-width: 140px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="gallery">
+    <!-- Baris pertama: 3 foto -->
+    <div class="photo-row">
+      <div class="photo">
+        <img src="poto1.jpg" alt="Foto 1">
+        <p class="caption">Awalnya biasa aja ternyata luar biasaaa 💐 </p>
+      </div>
+      <div class="photo">
+        <img src="poto2.jpg" alt="Foto 2">
+        <p class="caption">Sama kamu tuh, senyum gak pernah habis 😆</p>
+      </div>
+      <div class="photo">
+        <img src="poto3.jpg" alt="Foto 3">
+        <p class="caption">Waktu itu aku ngerasa... ini orangnya 😳</p>
+      </div>
+    </div>
+    <!-- Baris kedua: 2 foto -->
+    <div class="photo-row">
+      <div class="photo">
+        <img src="poto4.jpg" alt="Foto 4">
+        <p class="caption">Liat kamu kayak gini, hati aku tenang banget 🤍 😳</p>
+      </div>
+      <div class="photo">
+        <img src="poto5.jpg" alt="Foto 5">
+        <p class="caption">Langkah kecil, buat masa depan besar 🏡❤️</p>
+      </div>
+    </div>
+  </div>
+
+  <audio autoplay loop>
+  <source src="memori.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+  <button class="back-button" onclick="window.location.href='index.html'">Kembali</button>
+
+</body>
+</html>
