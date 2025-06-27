@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kuis Romantis</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #F4C2C2, #FFD1DC);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .quiz-container {
+      background-color: #FFF0F5;
+      color: #6B0F1A;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(255, 105, 180, 0.4);
+      width: 90%;
+      max-width: 600px;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .question-image {
+  max-width: 60%;
+  height: auto;
+  margin: 0 auto 20px auto;  
+  border-radius: 20px;
+  display: block;
+}
+
+
+    .question-text {
+      font-size: 1.3em;
+      margin-bottom: 20px;
+    }
+
+    .answer-input {
+      width: 100%;
+      padding: 12px;
+      font-size: 1em;
+      border-radius: 10px;
+      border: 2px solid #ffb6c1;
+      margin-bottom: 20px;
+      background-color: #fff;
+    }
+
+    .feedback {
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .next-button, .back-button {
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #ffb6c1;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .next-button:hover, .back-button:hover {
+      background-color: #ff99aa;
+    }
+
+    .score {
+      font-size: 1.3em;
+      margin-top: 20px;
+      color: #D81159;
+    }
+
+    .love {
+      position: fixed;
+      top: -50px;
+      width: 30px;
+      height: 30px;
+      background: url('https://pngimg.com/uploads/heart/heart_PNG51337.png') no-repeat center center;
+      background-size: contain;
+      animation: fall 5s linear infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      0% { top: -50px; opacity: 1; }
+      100% { top: 100vh; opacity: 0; }
+    }
+
+    #fireworks-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 5;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Fireworks Background -->
+<div id="fireworks-container"></div>
+
+<!-- Efek salah benar -->
+
+  <audio id="benar-sound" src="benar.mp3" preload="auto"></audio>
+<audio id="salah-sound" src="salah.mp3" preload="auto"></audio>
+
+<script>const benarSound = document.getElementById("benar-sound");
+const salahSound = document.getElementById("salah-sound");
+
+function playSoundBenar() {
+  benarSound.currentTime = 0;
+  benarSound.play();
+}
+
+function playSoundSalah() {
+  salahSound.currentTime = 0;
+  salahSound.play();
+}
+if (userAnswer === correctAnswer) {
+  playSoundBenar();
+  
+} else {
+  playSoundSalah();
+  
+}
+</script>
+
+<!-- Audio Musik Romantis -->
+<audio autoplay loop>
+  <source src="lagubuatgame.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Kuis Romantis -->
+<div class="quiz-container" id="game">
+  <img id="question-image" class="question-image" src="" alt="" style="display: none;">
+  <div id="question-text" class="question-text"></div>
+  <input type="text" id="answer-input" class="answer-input" placeholder="ketikk jawaban kamuu disiniii 💌">
+  <div id="feedback" class="feedback"></div>
+  <button id="next-button" class="next-button" style="display: none;">Next ➡️</button>
+  <div id="score" class="score"></div>
+  <button id="back-button" class="back-button" style="display: none;" onclick="window.location.href='index.html'">Balik ke Menu 🏠</button>
+</div>
+
+<!-- Script Game & Efek -->
+<script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.1.0/dist/index.umd.js"></script>
+<script>
+  // Fireworks
+  const container = document.getElementById('fireworks-container');
+  const fireworks = new Fireworks.default(container, {
+    hue: { min: 0, max: 360 },
+    delay: { min: 15, max: 30 },
+    speed: 2,
+    rocketsPoint: 50,
+    lineWidth: { trace: 1, explosion: 3 },
+    particles: 80
+  });
+  fireworks.start();
+
+  // Love fall
+  setInterval(() => {
+    const heart = document.createElement('div');
+    heart.classList.add('love');
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }, 400);
+
+  // Game logic
+  const questions = [
+    {
+      text: "Apa nama panjang boyfriend kamuu yang lucu iniii? 🐻",
+      answer: "Arryan Razkyatama",
+      image: "arryan.jpg"
+    },
+    {
+      text: "Tanggal berapaa niii kita jadiann? 📅",
+      answer: "16",
+      image: ""
+    },
+    {
+      text: "Apa makanan favorit kita bersama? 🍣",
+      answer: "ayam bakar",
+      image: ""
+    },
+    {
+      text: "Tanggal berapa boyfriend kamuu ultah? 💘",
+      answer: "27",
+      image: ""
+    },
+    {
+      text: "Apa rutinitas favorit kita bersama? 🥰 ",
+      answer: "tidur",
+      image: ""
+    }
+  ];
+
+  let currentQuestion = 0;
+  let score = 0;
+
+  const questionImage = document.getElementById('question-image');
+  const questionText = document.getElementById('question-text');
+  const answerInput = document.getElementById('answer-input');
+  const feedback = document.getElementById('feedback');
+  const nextButton = document.getElementById('next-button');
+  const backButton = document.getElementById('back-button');
+  const scoreDisplay = document.getElementById('score');
+
+  function loadQuestion() {
+    const q = questions[currentQuestion];
+    questionText.textContent = q.text;
+    answerInput.value = "";
+    feedback.textContent = "";
+    nextButton.style.display = "none";
+    backButton.style.display = "none";
+    scoreDisplay.textContent = "";
+    if (q.image) {
+      questionImage.src = q.image;
+      questionImage.style.display = "block";
+    } else {
+      questionImage.style.display = "none";
+    }
+  }
+
+  answerInput.addEventListener('keyup', function(event) {
+    if (event.key === 'Enter') {
+      checkAnswer();
+    }
+  });
+
+  function checkAnswer() {
+    const userAnswer = answerInput.value.trim().toLowerCase();
+    const correctAnswer = questions[currentQuestion].answer.toLowerCase();
+    if (userAnswer === "") {
+      feedback.textContent = "Masii kosongg niii ayanggg 🥺";
+      return;
+    }
+    if (userAnswer === correctAnswer) {
+      feedback.textContent = "YAYYYY ayanggg benarrrr ❤️😍";
+      playSoundBenar();
+      score++;
+    } else {
+      feedback.textContent = "Ehhh salah ayang 😭 Jawaban bener: " + questions[currentQuestion].answer;
+      playSoundSalah();
+    }
+    nextButton.style.display = "inline-block";
+  }
+
+  nextButton.addEventListener('click', function() {
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+      loadQuestion();
+    } else {
+      showScore();
+    }
+  });
+
+  function showScore() {
+    questionImage.style.display = "none";
+    questionText.textContent = "Yayyyyyy kuisnyaa selesai! 💕✨";
+    answerInput.style.display = "none";
+    feedback.textContent = "";
+    nextButton.style.display = "none";
+    scoreDisplay.textContent = "Skor kamu: " + score + " dari " + questions.length + " Ayanggkuuu Hebattt ❤️";
+    backButton.style.display = "inline-block";
+  }
+
+  loadQuestion();
+
+  
+</script>
+</body>
+</html>
